@@ -1,0 +1,23 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Autorization">
+    <output-path>$PROJECT_DIR$/out/artifacts/Autorization</output-path>
+    <root id="archive" name="Autorization.war">
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />
+      </element>
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Authorization" />
+          <element id="module-output" name="users" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="sqlite-jdbc-3.7.2" />
+        </element>
+      </element>
+      <element id="dir-copy" path="$PROJECT_DIR$" />
+      <element id="library" level="project" name="sqlite-jdbc-3.7.2" />
+      <element id="module-output" name="Classes" />
+      <element id="module-output" name="Authorization" />
+    </root>
+  </artifact>
+</component>

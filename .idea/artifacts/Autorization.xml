@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
-  <artifact type="war" name="Autorization">
-    <output-path>$PROJECT_DIR$/out/artifacts/Autorization</output-path>
+  <artifact type="war" build-on-make="true" name="Autorization">
+    <output-path>$PROJECT_DIR$</output-path>
     <root id="archive" name="Autorization.war">
       <element id="directory" name="META-INF">
         <element id="file-copy" path="$PROJECT_DIR$/META-INF/MANIFEST.MF" />

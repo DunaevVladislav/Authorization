@@ -92,6 +92,16 @@ public class Database {
         else throw new Exception("User with login = " + login + "not found");
     }
 
+    public String getLogin(Integer id) throws Exception {
+        ResultSet resSet = statmt.executeQuery("SELECT * FROM users WHERE id='" + id + "'");
+        if (resSet.next()){
+            String login = resSet.getString("login");
+            resSet.close();
+            return login;
+        }
+        else throw new Exception("User with id = " + id + "not found");
+    }
+
     public String getEmail(String login) throws Exception {
         ResultSet resSet = statmt.executeQuery("SELECT * FROM users WHERE login='" + login + "'");
         if (resSet.next()){
@@ -104,7 +114,7 @@ public class Database {
 
     public String getDateRegistration(String login) throws Exception {
         ResultSet resSet = statmt.executeQuery("SELECT * FROM users WHERE login='" + login + "'");        if (resSet.next()){
-            String date = resSet.getString("date");
+            String date = resSet.getString("time");
             resSet.close();
             return date;
         }

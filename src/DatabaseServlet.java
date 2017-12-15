@@ -68,6 +68,7 @@ public class DatabaseServlet extends HttpServlet{
                     "</head>");
             out.println("<body>");
             out.println("<div id='tableDiv'>");
+         //   out.println("<p>" + request.getRequestURL()+ "</p>");
             outUsersTable(out);
             out.println("</div>\n" +
                     "</body>\n" +
@@ -75,6 +76,8 @@ public class DatabaseServlet extends HttpServlet{
 
         } catch (SQLException e){
             out.println("<p>Что-то пошло не так</p>");
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             out.close();
         }

@@ -1,5 +1,6 @@
 import crypt.Crypt;
 import database.Database;
+import outerror.OutError;
 import users.MyCookie;
 import users.User;
 
@@ -25,24 +26,21 @@ public class LoginServlet extends HttpServlet{
         boolean remember = (request.getParameter("remember") != null);
 
         if (login == null || password == null){
-            out.println("Некорректные данные");
-            out.close();
+            OutError.printError(out, request.getRequestURL() + "/..", "Некорректные данные");
             return;
         }
 
             try {
                 User user = new User(login);
                 if (!Crypt.getHash(password).equals(user.getPassword())){
-                    out.println("<p>Неверный пароль</p>");
-                    out.close();
+                    OutError.printError(out, request.getRequestURL() + "/..", "Неверный пароль");
                     return;
                 }
                 MyCookie cookie = new MyCookie(request, response);
                 if (remember) cookie.setCookie(user);
                 else cookie.setSession(user);
             }catch (Exception e){
-                out.println("<p>" + e.getMessage() + "</p>");
-                out.close();
+                OutError.printError(out, request.getRequestURL() + "/..", e.getMessage());
                 return;
             }
         response.sendRedirect(request.getRequestURL() + "/..");

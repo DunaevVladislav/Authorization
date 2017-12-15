@@ -11,25 +11,31 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="utf-8">
-    <link rel="stylesheet" TYPE="text/css" HREF="css/index.css">
+    <meta charset="utf-8" name="viewport" content="user-scalable=no, width=device-width, height=device-height"/>
+    <link rel="stylesheet" TYPE="text/css" HREF='<%= request.getRequestURL()%>/../css/index.css'>
+    <link rel="stylesheet" TYPE="text/css" HREF='<%= request.getRequestURL()%>/../css/Form.css'>
     <title>Регистрация</title>
 </head>
 <body>
 <% if (user != null){
     response.sendRedirect(request.getRequestURL() + "/..");
 } else { %>
-<form action='<%=request.getRequestURL()%>/../addUser' method="post">
-    <p>Логин</p>
-    <input type="text" name="login"><br/>
-    <p>Почта</p>
-    <input type="text" name="email"><br/>
-    <p>Пароль</p>
-    <input type="password" name="password"><br/>
-    <p>Повторите пароль</p>
-    <input type="password" name="repPassword"><br/>
-    <p><input type="submit" value="Зарегистрироваться"></p>
-</form>
+<div id="helloDiv">
+    <p>
+        Добро пожаловать на сайт электронной библиотеки
+    </p>
+</div>
+<div id="divForm">
+    <div id="nameForm">Регистрация</div>
+    <form action='<%=request.getRequestURL()%>/../addUser' method="post">
+        <input type="text" name="login" placeholder="Логин"><br/>
+        <input type="text" name="email" placeholder="Email"><br/>
+        <input type="password" name="password" placeholder="Пароль"><br/>
+        <input type="password" name="repPassword" placeholder="Повторите пароль"><br/>
+        <p><input type="submit" value="Зарегистрироваться"></p>
+        <a href='<%=request.getRequestURL() + "/.."%>'><span>Войти</span></a>
+    </form>
+</div>
 <% } %>
 </body>
 </html>

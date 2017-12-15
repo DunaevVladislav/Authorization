@@ -1,5 +1,6 @@
 import crypt.Crypt;
 import database.Database;
+import outerror.OutError;
 import users.MyCookie;
 import users.User;
 
@@ -20,18 +21,24 @@ public class RegistrationServlet extends HttpServlet {
         response.setContentType("text/html; charset=UTF8");
         PrintWriter out = response.getWriter();
 
+
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String repPassword = request.getParameter("repPassword");
 
-        if (login == null || password == null || email == null || repPassword == null){
-            out.println("<p>Некорректные данные</p>");
+        if (login == null || password == null || email == null || repPassword == null || login.isEmpty() || email.isEmpty()){
+            OutError.printError(out, request.getRequestURL() + "/..", "Некорректные данные");
             return;
         }
 
         if (!password.equals(repPassword)) {
-            out.println("<p>Пароли не совпадают</p>");
+            OutError.printError(out, request.getRequestURL() + "/..", "Пароли не совпадают");
+            return;
+        }
+
+        if (password.length() < 6){
+            OutError.printError(out, request.getRequestURL() + "/..", "Пароли слишком короткий");
             return;
         }
 
@@ -39,15 +46,14 @@ public class RegistrationServlet extends HttpServlet {
         try {
             database = new Database();
         } catch (SQLException |ClassNotFoundException e) {
-            out.println("<p>Не удалось подключиться к базе данных</p>");
-            out.close();
+            OutError.printError(out, request.getRequestURL() + "/..", "Не удалось подключиться к базе данных");
             return;
         }
 
         try{
             database.insert(login, Crypt.getHash(password), email);
         } catch (Exception e){
-            out.println("<p>Пользователь с таким логином уже сущетсвует</p>");
+            OutError.printError(out, request.getRequestURL() + "/..", "Пользователь с таким логином уже сущетсвует");
             return;
         }
         try{
@@ -56,7 +62,8 @@ public class RegistrationServlet extends HttpServlet {
             MyCookie cookie = new MyCookie(request, response);
             cookie.setSession(user);
         } catch (Exception e){
-            out.println("<p>" + e.getMessage() + "</p>");
+            OutError.printError(out, request.getRequestURL() + "/..", "e.getMessage()");
+            return;
         }
         response.sendRedirect(request.getRequestURL() + "/..");
         out.close();

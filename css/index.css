@@ -1,0 +1,34 @@
+body {
+    background-image: url(../img/background.jpg);
+    background-position: left bottom; /* Положение фона */
+    background-repeat: repeat;
+}
+
+#helloDiv {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 26pt;
+    color: darkblue;
+}
+
+#exit {
+    width: 95%;
+    margin: 0 auto;
+    text-align: right;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 18pt;
+}
+
+#error{
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    font-family: Calibri;
+    font-weight: bold;
+    font-size: 20pt;
+    color: darkred;
+}

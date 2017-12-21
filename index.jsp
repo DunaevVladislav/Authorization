@@ -23,6 +23,9 @@
             <p>
                 <%=user.getLogin()%>, добро пожаловать на сайт электронной библиотеки
             </p>
+            <p>
+                Вы зашли на наш сайт: <%=user.getVisits().toString()%> раз(а)
+            </p>
             <img src='<%= request.getRequestURL()%>img/book.png'/>
         </div>
         <div id="exit">

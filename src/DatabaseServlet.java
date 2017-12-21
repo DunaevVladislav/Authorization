@@ -1,6 +1,5 @@
 import database.Database;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,14 +8,20 @@ import java.io.PrintWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * сервлета, для работы с бд (для отладки)
+ */
 public class DatabaseServlet extends HttpServlet{
 
+    /**
+     * база данных
+     */
     private Database database = null;
 
     /**
      * выводит html-таблицу с пользователями
      * @param out - объект PrintWriter, для вывода в html
-     * @throws java.sql.SQLException
+     * @throws SQLException исключение, если не удалось подключиться к бд
      */
     private void outUsersTable(PrintWriter out) throws SQLException{
         ResultSet resSet = database.statmt.executeQuery("SELECT * FROM users");
@@ -44,9 +49,14 @@ public class DatabaseServlet extends HttpServlet{
     }
 
 
+    /**+
+     * ответ на GET-запрос
+     * @param request запрос
+     * @param response ответ
+     * @throws IOException исключение, если не удалось получить поток вывода
+     */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         response.setContentType("text/html; charset=UTF8");
         PrintWriter out = response.getWriter();
@@ -82,9 +92,7 @@ public class DatabaseServlet extends HttpServlet{
             out.close();
         }
 
-        try {
-            database.finalize();
-        } catch (SQLException ignored){}
+        database.finalize();
 
     }
 

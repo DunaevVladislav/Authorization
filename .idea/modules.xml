@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Authorization.iml" filepath="$PROJECT_DIR$/Authorization.iml" />
-      <module fileurl="file://$PROJECT_DIR$/src/Users/Classes.iml" filepath="$PROJECT_DIR$/src/Users/Classes.iml" />
+      <module fileurl="file://$PROJECT_DIR$/src/Classes/Classes.iml" filepath="$PROJECT_DIR$/src/Classes/Classes.iml" />
     </modules>
   </component>
 </project>

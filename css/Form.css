@@ -1,6 +1,6 @@
 input[type="text"], input[type="password"] {
     display: block;
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     font-size: 17pt;
     border: solid 2px darkblue;
     border-radius: 7px;
@@ -12,14 +12,14 @@ input[type="checkbox"] {
 
 input[type="submit"], input[type="button"]{
     display: block;
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     border: solid 2px darkblue;
     border-radius: 7px;
     background-color: white;
 }
 
 form > span {
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     font-size: 16pt;
     padding-left: 10px;
     vertical-align: 6px;
@@ -32,7 +32,7 @@ input[type="submit"] {
 #success{
     color: green;
     margin-top: 25px;
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     font-size: 17pt;
     text-align: center;
 }
@@ -51,7 +51,7 @@ input[type="submit"] {
     padding: 10px;
     width: 295px;
     margin: 0 auto;
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     font-size: 22pt;
     color: darkblue;
     text-align: center;
@@ -73,7 +73,7 @@ input[type="checkbox"] {
 
 
 form > a {
-    font-family: Calibri;
+    font-family: Calibri, sans-serif;
     font-size: 16pt;
     padding-left: 10px;
     vertical-align: 6px;

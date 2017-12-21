@@ -1,10 +1,9 @@
-import crypt.Crypt;
 import database.Database;
-import outerror.OutError;
 import users.MyCookie;
 import users.User;
+import utils.Crypt;
+import utils.OutError;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,14 +11,28 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
 
+/**
+ * сервлет для регистарции пользователей
+ */
 public class RegistrationServlet extends HttpServlet {
 
+    /**
+     * обрабатывает POST-запрос на регистрацию нового пользователя
+     * @param request запрос
+     * @param response ответ
+     */
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException {
+    public void doPost(HttpServletRequest request, HttpServletResponse response){
+
 
         response.setContentType("text/html; charset=UTF8");
-        PrintWriter out = response.getWriter();
+        PrintWriter out;
+        try {
+            out = response.getWriter();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return;
+        }
 
 
         String login = request.getParameter("login");
@@ -65,7 +78,11 @@ public class RegistrationServlet extends HttpServlet {
             OutError.printError(out, request.getRequestURL() + "/..", "e.getMessage()");
             return;
         }
-        response.sendRedirect(request.getRequestURL() + "/..");
+        try {
+            response.sendRedirect(request.getRequestURL() + "/..");
+        } catch (IOException e) {
+            OutError.printError(out, request.getRequestURL() + "/..", "Регистрация прошла успешено! Перейдите на главную страницу.");
+        }
         out.close();
 
     }

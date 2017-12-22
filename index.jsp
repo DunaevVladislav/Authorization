@@ -14,6 +14,10 @@
         <meta charset="utf-8" name="viewport" content="user-scalable=no, width=device-width, height=device-height"/>
         <link rel="stylesheet" TYPE="text/css" href='<%= request.getRequestURL()%>css/index.css'>
         <link rel="stylesheet" TYPE="text/css" href='<%= request.getRequestURL()%>css/Form.css'>
+        <script type="text/javascript" src='<%= request.getRequestURL()%>js/jquery-3.2.1.min.js'></script>
+        <script type="text/javascript" src='<%= request.getRequestURL()%>js/submitForm.js'></script>
+        <script type="text/javascript" src='<%= request.getRequestURL()%>js/crypt.js'></script>
+        <script type="text/javascript" src='<%= request.getRequestURL()%>js/authorization.js'></script>
         <title>Авторизация</title>
     </head>
     <body>
@@ -29,7 +33,7 @@
             <img src='<%= request.getRequestURL()%>img/book.png'/>
         </div>
         <div id="exit">
-            <a href="logout">Выход</a>
+            <a href='<%= request.getRequestURL()%>logout'>Выход</a>
         </div>
     <%} else { %>
     <div id="helloDiv">
@@ -40,10 +44,10 @@
     <div id="divForm">
         <div id="nameForm">Авторизация</div>
         <form action='<%=request.getRequestURL()%>login' method="post">
-            <input type="text" name="login" placeholder="Логин"><br/>
-            <input type="password" name="password" placeholder="Логин"><br/>
-            <input type="checkbox" name="remember"><span>Запомнить меня</span><br>
-            <p><input type="submit" value="Войти"></p></br>
+            <input type="text" name="login" id="login" placeholder="Логин"><br/>
+            <input type="password" name="password" id="password" placeholder="Пароль"><br/>
+            <input type="checkbox" name="remember" id="remember"><span>Запомнить меня</span><br>
+            <p><input type="button" id = "submitForm" value="Войти"></p></br>
             <a href="registration.jsp"><span>Регистрация</span></a>
         </form>
     </div>

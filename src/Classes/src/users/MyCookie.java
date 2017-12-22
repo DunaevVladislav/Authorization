@@ -74,8 +74,10 @@ public class MyCookie {
      */
     public void setCookie(User user){
         Cookie cookieID = new Cookie("id", user.getId().toString());
+        cookieID.setPath("/");
         cookieID.setMaxAge(maxAgeCookie);
         Cookie cookieToken = new Cookie("token", user.getToken());
+        cookieToken.setPath("/");
         cookieToken.setMaxAge(maxAgeCookie);
         response.addCookie(cookieID);
         response.addCookie(cookieToken);
@@ -86,8 +88,10 @@ public class MyCookie {
      */
     private void removeCookie(){
         Cookie cookieID = new Cookie("id", "");
+        cookieID.setPath("/");
         cookieID.setMaxAge(0);
         Cookie cookieToken = new Cookie("token", "");
+        cookieToken.setPath("/");
         cookieToken.setMaxAge(0);
         response.addCookie(cookieID);
         response.addCookie(cookieToken);

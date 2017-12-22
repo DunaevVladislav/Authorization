@@ -1,11 +1,28 @@
 package utils;
 
 import java.io.PrintWriter;
+import java.util.LinkedList;
 
 /**
  * класс для обработки ошибок
  */
 public class OutError {
+
+    /**
+     * выводит ошибки в формате JSON
+     * @param strArr массив строк, содеражащих описание ошибок
+     * @param out поток текстового вывода
+     */
+    public static void printJSONError(LinkedList<String> strArr, PrintWriter out){
+        out.print("[");
+        for(int i = 0; i < strArr.size(); i++){
+            out.print("\"" );//+ i + "\": \"" );
+            out.print(strArr.get(i));
+            out.print("\"");
+            if (i + 1 != strArr.size()) out.print(",");
+        }
+        out.print("]");
+    }
 
     /**
      * выводит текст ошибки на экран

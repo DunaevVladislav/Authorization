@@ -25,6 +25,15 @@ form > span {
     vertical-align: 6px;
 }
 
+#errorList {
+    color: red;
+    font-family: Calibri, sans-serif;
+    margin-top: 20px;
+    text-align: center;
+    font-size: 16pt;
+    line-height: 2;
+}
+
 input[type="submit"] {
     display: block;
 }
@@ -41,7 +50,7 @@ input[type="submit"] {
     width: 500px;
     background-color: rgba(192, 192, 192, 0.8);
     margin: 20px auto;
-    margin-top: 8vh;
+    margin-top: 4vh;
     padding: 20px;
     padding-bottom: 40px;
     border: solid 2px darkblue;
@@ -58,19 +67,18 @@ input[type="submit"] {
 }
 input[type="text"], input[type="password"] {
     width: 400px;
-    height: 40px;
+    height: 24px;
     margin: 0 auto;
-    margin-top: 30px;
+    margin-top: 16px;
     font-size: 16pt;
     padding: 15px;
 }
 input[type="checkbox"] {
     width: 30px;
     height: 30px;
-    margin-top: 40px;
+    margin-top: 18px;
     margin-left: 50px;
 }
-
 
 form > a {
     font-family: Calibri, sans-serif;
@@ -81,8 +89,8 @@ form > a {
 
 input[type="submit"], input[type="button"]{
     width: 230px;
-    height: 50px;
+    height: 48px;
     margin: 0 auto;
-    margin-top: 40px;
+    margin-top: 22px;
     font-size: 16pt;
 }

@@ -1,6 +1,7 @@
 import database.Database;
 import users.MyCookie;
 import users.User;
+import utils.CheckData;
 import utils.Crypt;
 import utils.OutError;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 /**
  * сервлет для регистарции пользователей
@@ -25,48 +27,67 @@ public class RegistrationServlet extends HttpServlet {
     public void doPost(HttpServletRequest request, HttpServletResponse response){
 
 
-        response.setContentType("text/html; charset=UTF8");
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
         PrintWriter out;
+        LinkedList<String> errors = new LinkedList<>();
         try {
             out = response.getWriter();
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
+        Database database;
 
+
+
+        try {
+            database = new Database();
+        } catch (SQLException |ClassNotFoundException e) {
+            errors.add("Не удалось подключиться к базе данных");
+            OutError.printJSONError(errors, out);
+            out.close();
+            return;
+        }
 
         String login = request.getParameter("login");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
         String repPassword = request.getParameter("repPassword");
 
-        if (login == null || password == null || email == null || repPassword == null || login.isEmpty() || email.isEmpty()){
-            OutError.printError(out, request.getRequestURL() + "/..", "Некорректные данные");
-            return;
+
+
+        if (login == null || !CheckData.check(login)){
+            errors.add("Логин должен состоять из латинских букв или цифр");
+            errors.add("Длина логина должна быть от 3 до 32 символов");
+        }
+        if(password == null || repPassword == null || !CheckData.check(password) || !CheckData.check(repPassword)){
+            errors.add("Некорректный пароль");
         }
 
-        if (!password.equals(repPassword)) {
-            OutError.printError(out, request.getRequestURL() + "/..", "Пароли не совпадают");
-            return;
+
+        if (password !=null && repPassword != null && !password.equals(repPassword)) {
+            errors.add("Пароли не совпадают");
         }
 
-        if (password.length() < 6){
-            OutError.printError(out, request.getRequestURL() + "/..", "Пароли слишком короткий");
-            return;
+        if (email == null || !CheckData.checkEmail(email)){
+            errors.add("Некорректный email");
         }
 
-        Database database;
-        try {
-            database = new Database();
-        } catch (SQLException |ClassNotFoundException e) {
-            OutError.printError(out, request.getRequestURL() + "/..", "Не удалось подключиться к базе данных");
+
+
+        if (!errors.isEmpty()){
+            OutError.printJSONError(errors, out);
+            out.close();
             return;
         }
 
         try{
             database.insert(login, Crypt.getHash(password), email);
         } catch (Exception e){
-            OutError.printError(out, request.getRequestURL() + "/..", "Пользователь с таким логином уже сущетсвует");
+            errors.add("Пользователь с таким логином уже сущетсвует");
+            OutError.printJSONError(errors, out);
+            out.close();
             return;
         }
         try{
@@ -75,16 +96,10 @@ public class RegistrationServlet extends HttpServlet {
             MyCookie cookie = new MyCookie(request, response);
             cookie.setSession(user);
         } catch (Exception e){
-            OutError.printError(out, request.getRequestURL() + "/..", "e.getMessage()");
-            return;
+            errors.add(e.getMessage());
         }
-        try {
-            response.sendRedirect(request.getRequestURL() + "/..");
-        } catch (IOException e) {
-            OutError.printError(out, request.getRequestURL() + "/..", "Регистрация прошла успешено! Перейдите на главную страницу.");
-        }
+        OutError.printJSONError(errors, out);
         out.close();
-
     }
 
 }

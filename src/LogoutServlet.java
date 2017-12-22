@@ -1,5 +1,4 @@
 import users.MyCookie;
-import utils.OutError;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,29 +17,16 @@ public class LogoutServlet extends HttpServlet{
      * @param response ответ
      */
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
-        response.setContentType("text/html; charset=UTF8");
-        PrintWriter out = null;
-        try {
-            out = response.getWriter();
-        } catch (IOException ignored) {}
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        PrintWriter out = response.getWriter();
 
         MyCookie cookie = new MyCookie(request, response);
-        try {
-            cookie.remove();
+        cookie.remove();
+        response.sendRedirect(request.getRequestURL() + "/..");
 
-        } catch (Exception ignored) {}
-        try {
-            response.sendRedirect(request.getRequestURL() + "/..");
-        } catch (IOException e) {
-            if (out !=  null) {
-                OutError.printError(out, request.getRequestURL() + "/..", "Выход осуществлен успешно! Перейдите на главную страницу.");
-            }else{
-                e.printStackTrace();
-            }
-        }
-
-        if (out!= null) out.close();
+        out.close();
     }
 }

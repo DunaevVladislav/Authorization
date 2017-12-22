@@ -9,15 +9,13 @@
         <element id="directory" name="classes">
           <element id="module-output" name="Authorization" />
           <element id="module-output" name="users" />
+          <element id="module-output" name="Classes" />
         </element>
         <element id="directory" name="lib">
           <element id="library" level="project" name="sqlite-jdbc-3.7.2" />
         </element>
       </element>
       <element id="dir-copy" path="$PROJECT_DIR$" />
-      <element id="library" level="project" name="sqlite-jdbc-3.7.2" />
-      <element id="module-output" name="Classes" />
-      <element id="module-output" name="Authorization" />
     </root>
   </artifact>
 </component>
